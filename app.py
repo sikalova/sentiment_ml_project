@@ -2,11 +2,9 @@ import streamlit as st
 import joblib
 import json
 import os
-# Импортируем логику
 from src.utils import clean_text, MODEL_FILE, METRICS_FILE
 
-# Настройка страницы
-st.set_page_config(page_title="Анализ Отзывов", page_icon="🧠", layout="wide")
+st.set_page_config(page_title="Анализ Отзывов", layout="wide")
 
 def load_assets():
     model = None
@@ -15,17 +13,13 @@ def load_assets():
         with open(METRICS_FILE, 'r') as f:
             metrics = json.load(f)
     if os.path.exists(MODEL_FILE):
-        try:
-            model = joblib.load(MODEL_FILE)
-        except Exception as e:
-            st.error(f"Ошибка модели: {e}")
+         model = joblib.load(MODEL_FILE)
     return model, metrics
-
 model, metrics = load_assets()
 
 # --- SIDEBAR ---
 with st.sidebar:
-    st.header("📊 Инфо")
+    st.header("Инфо")
     if metrics:
         st.metric("Точность", f"{metrics.get('accuracy', 0):.1%}")
         st.caption("Machine Learning: Logistic Regression")
@@ -33,27 +27,22 @@ with st.sidebar:
         st.warning("Нет метрик. Запустите train.py")
 
 # --- MAIN ---
-st.title("🧠 ML Sentiment Analysis")
-
+st.title("ML Sentiment Analysis")
 if not model:
     st.error("Модель не найдена! Сначала запустите обучение.")
     st.stop()
-
 text = st.text_area("Введите отзыв (Eng):", height=150)
-
 if st.button("Анализировать", type="primary"):
     if text.strip():
         probs = model.predict_proba([text])[0]
         pos_score = probs[1]
-        
         st.write(f"Позитивность: **{pos_score*100:.1f}%**")
         st.progress(pos_score)
-        
         if pos_score > 0.6:
-            st.success("ПОЗИТИВНЫЙ ОТЗЫВ 😄")
+            st.success("ПОЗИТИВНЫЙ ОТЗЫВ")
         elif pos_score < 0.4:
-            st.error("НЕГАТИВНЫЙ ОТЗЫВ 😡")
+            st.error("НЕГАТИВНЫЙ ОТЗЫВ")
         else:
-            st.info("НЕЙТРАЛЬНО 😐")
+            st.info("НЕЙТРАЛЬНО")
     else:
         st.warning("Введите текст!")
