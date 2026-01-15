@@ -29,7 +29,7 @@
 > This was a complete waste of time. The script is terrible and the characters are annoying.
 
 **3. Запутанный отзыв:**
-> Honestly, it was not bad. I expected it to be boring, but the acting was actually decent.
+> Honestly, it was not bad. I expected it to be boring, but the acting was actually good.
 
 **4. Смешанный отзыв:**
 > The visual effects were stunning, but the plot was weak and predictable.
