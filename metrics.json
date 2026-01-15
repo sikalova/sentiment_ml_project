@@ -1,1 +1,1 @@
-{"accuracy": 0.89, "f1_pos": 0.892578125, "f1_neg": 0.8872950819672131, "dataset_size": 50000}
+{"accuracy_test": 0.9008, "accuracy_train": 0.920975, "f1_pos": 0.9031439172036712, "f1_neg": 0.8983398237343718, "dataset_size": 50000}
